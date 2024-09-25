@@ -5,7 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.arafat1419.collektr.presentation.ui.features.detail.DetailScreen
 import com.arafat1419.collektr.presentation.ui.features.home.HomeScreen
+import com.arafat1419.collektr.presentation.ui.features.live.LiveScreen
 import com.arafat1419.collektr.presentation.ui.features.profile.ProfileScreen
 import com.arafat1419.collektr.presentation.ui.features.saved.SavedScreen
 
@@ -17,13 +19,19 @@ fun MainNavHost(modifier: Modifier = Modifier, navController: NavHostController)
         modifier = modifier
     ) {
         composable(NavigationItem.Home.route) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
         composable(NavigationItem.Saved.route) {
-            SavedScreen()
+            SavedScreen(navController = navController)
         }
         composable(NavigationItem.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(navController = navController)
+        }
+        composable(NavigationItem.LiveAuction.route) {
+            LiveScreen(navController = navController)
+        }
+        composable(NavigationItem.DetailAuction.route) {
+            DetailScreen(navController = navController)
         }
     }
 }

@@ -17,7 +17,7 @@ import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.arafat1419.collektr.presentation.ui.enums.AppBar
+import com.arafat1419.collektr.presentation.ui.components.AppBarState
 import com.arafat1419.collektr.presentation.ui.theme.Black
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
@@ -29,7 +29,7 @@ fun BottomNavigationBar(
 ) {
     var navigationSelectedItem: NavigationItem by rememberSaveable { mutableStateOf(NavigationItem.Home) }
     val bottomNavigationItems = NavigationItem.entries
-        .filter { it.appBar == AppBar.HOME || it.appBar == AppBar.MAIN }
+        .filter { it.appBarState == AppBarState.HOME || it.appBarState == AppBarState.MAIN }
 
     NavigationBar(
         modifier = modifier,
