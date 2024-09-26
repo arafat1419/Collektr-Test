@@ -18,7 +18,7 @@ object PresentationUtils {
     )
 
     @Composable
-    fun GetScreenWidthInDp(): Dp {
+    fun getScreenWidthInDp(): Dp {
         val configuration = LocalConfiguration.current
         val screenWidthPx = dpToPx(configuration.screenWidthDp.dp)
 

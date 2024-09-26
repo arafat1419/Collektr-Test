@@ -3,4 +3,9 @@
     <string name="app_logo">App Logo</string>
     <string name="live">Live</string>
     <string name="rm_format">RM%1$s</string>
+    <string name="creator_logo">Creator Logo</string>
+    <string name="live_audience">Live Audience</string>
+    <string name="auction_item">Auction Item</string>
+    <string name="send_message">Send message</string>
+    <string name="highest_bid">Highest Bid</string>
 </resources>
