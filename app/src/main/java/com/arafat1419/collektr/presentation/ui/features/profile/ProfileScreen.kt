@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.arafat1419.collektr.presentation.ui.components.AppBar
+import com.arafat1419.collektr.presentation.ui.components.TopAppBar
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 
 @Composable
@@ -17,7 +17,7 @@ fun ProfileScreen(
         modifier = modifier
             .fillMaxSize()
     ) {
-        AppBar(
+        TopAppBar(
             modifier = modifier,
             navController = navController,
             navigationItem = NavigationItem.Profile

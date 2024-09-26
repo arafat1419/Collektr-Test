@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.arafat1419.collektr.presentation.ui.components.AppBar
 import com.arafat1419.collektr.presentation.ui.components.AuctionCarousel
+import com.arafat1419.collektr.presentation.ui.components.TopAppBar
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
@@ -41,7 +41,7 @@ fun HomeScreen(
         modifier = modifier
             .fillMaxSize()
     ) {
-        AppBar(
+        TopAppBar(
             modifier = modifier,
             navController = navController,
             navigationItem = NavigationItem.Home

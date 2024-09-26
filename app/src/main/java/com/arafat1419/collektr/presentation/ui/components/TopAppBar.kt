@@ -30,7 +30,7 @@ import com.arafat1419.collektr.presentation.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(
+fun TopAppBar(
     modifier: Modifier = Modifier,
     navController: NavController,
     navigationItem: NavigationItem,

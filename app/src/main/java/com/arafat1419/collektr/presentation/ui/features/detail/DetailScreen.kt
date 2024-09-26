@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.arafat1419.collektr.R
-import com.arafat1419.collektr.presentation.ui.components.AppBar
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
 import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
 import com.arafat1419.collektr.presentation.ui.components.MessageAndBidItem
+import com.arafat1419.collektr.presentation.ui.components.TopAppBar
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.LightWhite
 import com.arafat1419.collektr.presentation.ui.theme.Primary
@@ -47,7 +47,7 @@ fun DetailScreen(
             .fillMaxSize()
     ) {
         Column {
-            AppBar(
+            TopAppBar(
                 modifier = modifier,
                 navController = navController,
                 navigationItem = NavigationItem.DetailAuction

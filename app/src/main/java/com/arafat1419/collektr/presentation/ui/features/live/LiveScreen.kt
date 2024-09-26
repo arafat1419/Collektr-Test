@@ -24,13 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.arafat1419.collektr.R
 import com.arafat1419.collektr.presentation.PresentationUtils
-import com.arafat1419.collektr.presentation.ui.components.AppBar
 import com.arafat1419.collektr.presentation.ui.components.AuctionPopUp
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
 import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
 import com.arafat1419.collektr.presentation.ui.components.LiveCount
 import com.arafat1419.collektr.presentation.ui.components.MessageAndBidItem
+import com.arafat1419.collektr.presentation.ui.components.TopAppBar
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
@@ -48,7 +48,7 @@ fun LiveScreen(
             .fillMaxSize()
     ) {
         Column {
-            AppBar(
+            TopAppBar(
                 modifier = modifier,
                 navController = navController,
                 navigationItem = NavigationItem.LiveAuction,
