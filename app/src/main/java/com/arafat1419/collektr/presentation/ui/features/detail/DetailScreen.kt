@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -30,9 +28,9 @@ import com.arafat1419.collektr.R
 import com.arafat1419.collektr.presentation.ui.components.AppBar
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
+import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
 import com.arafat1419.collektr.presentation.ui.components.MessageAndBidItem
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
-import com.arafat1419.collektr.presentation.ui.theme.DarkGray
 import com.arafat1419.collektr.presentation.ui.theme.LightWhite
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
@@ -42,6 +40,8 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
+    val chatBids = (0..10).toList()
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -144,37 +144,13 @@ fun DetailScreen(
                         color = LightWhite
                     )
 
-                    LazyColumn(
+                    MessageAndBidList(
                         modifier = Modifier
                             .padding(top = 16.dp, bottom = 112.dp)
                             .fillMaxWidth()
                             .height(192.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        itemsIndexed(listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) { index, item ->
-                            if (index % 2 == 0) {
-                                MessageAndBidItem(
-                                    modifier = Modifier
-                                        .background(
-                                            Primary.copy(alpha = 0.6F),
-                                            RoundedCornerShape(4.dp)
-                                        ),
-                                    title = "Arafat Maku",
-                                    message = "BID RM150"
-                                )
-                            } else {
-                                MessageAndBidItem(
-                                    modifier = Modifier
-                                        .background(
-                                            DarkGray.copy(alpha = 0.6F),
-                                            RoundedCornerShape(4.dp)
-                                        ),
-                                    title = "Arafat Maku",
-                                    message = "Amazing Stuff!!"
-                                )
-                            }
-                        }
-                    }
+                        chatBids = chatBids
+                    )
                 }
             }
         }

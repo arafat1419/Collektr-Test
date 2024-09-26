@@ -1,7 +1,6 @@
 package com.arafat1419.collektr.presentation.ui.features.live
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -31,10 +28,10 @@ import com.arafat1419.collektr.presentation.ui.components.AppBar
 import com.arafat1419.collektr.presentation.ui.components.AuctionPopUp
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
+import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
 import com.arafat1419.collektr.presentation.ui.components.LiveCount
 import com.arafat1419.collektr.presentation.ui.components.MessageAndBidItem
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
-import com.arafat1419.collektr.presentation.ui.theme.DarkGray
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
@@ -44,6 +41,8 @@ fun LiveScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
+    val chatBids = (0..10).toList()
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -107,35 +106,10 @@ fun LiveScreen(
                         modifier = Modifier
                             .padding(start = 16.dp, bottom = 12.dp),
                     ) {
-                        LazyColumn(
+                        MessageAndBidList(
                             modifier = Modifier.height(120.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            itemsIndexed(listOf(0, 1, 2, 3)) { index, item ->
-                                if (index % 2 == 0) {
-                                    MessageAndBidItem(
-                                        modifier = Modifier
-                                            .background(
-                                                Primary.copy(alpha = 0.6F),
-                                                RoundedCornerShape(4.dp)
-                                            ),
-                                        title = "Arafat Maku",
-                                        message = "BID RM150"
-                                    )
-                                } else {
-                                    MessageAndBidItem(
-                                        modifier = Modifier
-                                            .background(
-                                                DarkGray.copy(alpha = 0.6F),
-                                                RoundedCornerShape(4.dp)
-                                            ),
-                                        title = "Arafat Maku",
-                                        message = "Amazing Stuff!!"
-                                    )
-                                }
-                            }
-                        }
-
+                            chatBids = chatBids
+                        )
                         MessageAndBidItem(
                             modifier = Modifier
                                 .padding(top = 8.dp)
