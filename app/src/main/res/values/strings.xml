@@ -8,4 +8,8 @@
     <string name="auction_item">Auction Item</string>
     <string name="send_message">Send message</string>
     <string name="highest_bid">Highest Bid</string>
+    <string name="creator">Creator</string>
+    <string name="ending_in">Ending in</string>
+    <string name="description">Description</string>
+    <string name="live_chat_bidding"><![CDATA[Live Chat & Bidding]]></string>
 </resources>

@@ -31,8 +31,8 @@ fun BottomMessageAndBid(modifier: Modifier = Modifier) {
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        White.copy(alpha = 0.5F),
-                        Black.copy(alpha = 0.5F)
+                        White.copy(alpha = 0.4F),
+                        Black.copy(alpha = 0.4F)
                     )
                 )
             )
