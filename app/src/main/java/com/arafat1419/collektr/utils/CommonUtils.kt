@@ -1,4 +1,4 @@
-package com.arafat1419.collektr
+package com.arafat1419.collektr.utils
 
 object CommonUtils {
     fun Long.moneyFormat(): String {

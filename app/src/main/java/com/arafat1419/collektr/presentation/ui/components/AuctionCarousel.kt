@@ -33,12 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.arafat1419.collektr.CommonUtils.moneyFormat
 import com.arafat1419.collektr.R
-import com.arafat1419.collektr.presentation.PresentationUtils
 import com.arafat1419.collektr.presentation.ui.features.home.AuctionItem
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
+import com.arafat1419.collektr.presentation.utils.PresentationUtils
+import com.arafat1419.collektr.utils.CommonUtils.moneyFormat
 
 @Composable
 fun AuctionCarousel(

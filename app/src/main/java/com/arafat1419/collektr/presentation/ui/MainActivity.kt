@@ -14,12 +14,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.arafat1419.collektr.presentation.PresentationUtils
 import com.arafat1419.collektr.presentation.ui.components.AppBarState
 import com.arafat1419.collektr.presentation.ui.navigation.BottomNavigationBar
 import com.arafat1419.collektr.presentation.ui.navigation.MainNavHost
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.CollektrTheme
+import com.arafat1419.collektr.presentation.utils.PresentationUtils
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
