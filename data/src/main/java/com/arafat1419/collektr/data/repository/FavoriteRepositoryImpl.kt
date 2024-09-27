@@ -15,7 +15,7 @@ internal class FavoriteRepositoryImpl(
 ) : FavoriteRepository {
     override suspend fun getFavoriteAuctions(): Flow<Resource<List<FavoriteAuction>>> =
         NetworkBoundResource<List<FavoriteAuction>, List<AuctionEntity>>(
-            shouldFetch = false,
+            shouldFetch = { false },
             loadFromDB = {
                 favoriteLocalSource.getAuctions().map {
                     it.map { auctionEntity -> auctionEntity.toDomain() }

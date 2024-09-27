@@ -12,6 +12,8 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
 
+        buildConfigField("String", "BASE_URL", "\"https://catfact.ninja/\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -32,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -44,4 +49,7 @@ dependencies {
     implementation(libs.room)
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 }
