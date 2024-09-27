@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(libs.bundles.base.dependencies)
+    implementation(project(path = ":domain"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

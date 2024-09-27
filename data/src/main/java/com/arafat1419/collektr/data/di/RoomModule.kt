@@ -6,6 +6,8 @@ import com.arafat1419.collektr.data.local.db.AppDatabase
 import com.arafat1419.collektr.data.local.db.FavoriteDao
 import com.arafat1419.collektr.data.local.source.FavoriteLocalSource
 import com.arafat1419.collektr.data.local.source.FavoriteLocalSourceImpl
+import com.arafat1419.collektr.data.repository.FavoriteRepositoryImpl
+import com.arafat1419.collektr.domain.repository.FavoriteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +39,11 @@ class RoomModule {
     @Singleton
     fun provideFavoriteLocalSource(favoriteDao: FavoriteDao): FavoriteLocalSource {
         return FavoriteLocalSourceImpl(favoriteDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteRepository(favoriteLocalSource: FavoriteLocalSource): FavoriteRepository {
+        return FavoriteRepositoryImpl(favoriteLocalSource)
     }
 }

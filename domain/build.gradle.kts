@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(project(path = ":data"))
     implementation(libs.bundles.base.dependencies)
 
     implementation(libs.hilt.android)

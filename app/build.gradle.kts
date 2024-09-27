@@ -53,6 +53,8 @@ android {
 
 dependencies {
     implementation(project(path = ":presentation"))
+    implementation(project(path = ":domain"))
+    implementation(project(path = ":data"))
     implementation(libs.bundles.base.dependencies)
 
     implementation(libs.androidx.activity.compose)
