@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.arafat1419.collektr.R
+import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.theme.White
 
 @Composable

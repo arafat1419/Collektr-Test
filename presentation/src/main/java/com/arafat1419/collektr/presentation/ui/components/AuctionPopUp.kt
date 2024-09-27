@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.arafat1419.collektr.R
+import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
 

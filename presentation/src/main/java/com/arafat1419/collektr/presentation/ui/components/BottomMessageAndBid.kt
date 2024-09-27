@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.arafat1419.collektr.R
+import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.theme.Black
 import com.arafat1419.collektr.presentation.ui.theme.White
 

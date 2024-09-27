@@ -22,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.arafat1419.collektr.R
+import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.components.AuctionPopUp
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
