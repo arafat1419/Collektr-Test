@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Collektr"
 include(":app")
+include(":data")
