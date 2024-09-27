@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.arafat1419.collektr"
-    compileSdk = 34
+    namespace = libs.versions.applicationId.get()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.arafat1419.collektr"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = libs.versions.applicationId.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -51,10 +51,7 @@ android {
 
 dependencies {
     implementation(project(path = ":presentation"))
+    implementation(libs.bundles.base.dependencies)
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

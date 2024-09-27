@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.arafat1419.collektr.data"
-    compileSdk = 34
+    namespace = "${libs.versions.applicationId.get()}.data"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -33,9 +33,5 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.bundles.base.dependencies)
 }
