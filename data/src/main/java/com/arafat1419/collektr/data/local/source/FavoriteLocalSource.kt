@@ -5,6 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteLocalSource {
     fun getAuctions(): Flow<List<AuctionEntity>>
-    suspend fun insertAuction(auction: AuctionEntity)
-    suspend fun deleteAuction(auction: AuctionEntity)
+    suspend fun setFavoriteAuction(auctionId: Int, isFavorite: Boolean)
 }

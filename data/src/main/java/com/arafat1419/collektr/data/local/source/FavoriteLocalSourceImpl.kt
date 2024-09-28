@@ -6,12 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class FavoriteLocalSourceImpl(private val favoriteDao: FavoriteDao) : FavoriteLocalSource {
     override fun getAuctions(): Flow<List<AuctionEntity>> = favoriteDao.getFavoriteAuctions()
-
-    override suspend fun insertAuction(auction: AuctionEntity) {
-        favoriteDao.insertFavoriteAuction(auction)
-    }
-
-    override suspend fun deleteAuction(auction: AuctionEntity) {
-        favoriteDao.deleteFavoriteAuction(auction)
+    override suspend fun setFavoriteAuction(auctionId: Int, isFavorite: Boolean) {
+        favoriteDao.setFavoriteAuction(auctionId, isFavorite)
     }
 }

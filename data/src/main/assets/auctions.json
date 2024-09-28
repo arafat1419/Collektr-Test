@@ -1,0 +1,87 @@
+[
+  {
+    "id": 1,
+    "creator": {
+      "id": 101,
+      "name": "The Collective",
+      "img": "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/oDlmVNeQ210pRwBm54xAWni9YQVFkYy0UoY42B8B.jpg"
+    },
+    "category": {
+      "id": 201,
+      "name": "Magic The Gathering"
+    },
+    "img": "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8JCRKXAPB2Z47B6GWVRS7KK-collektr.webp",
+    "name": "Moana - Undeterred Voyager",
+    "highest_bid": 100,
+    "auction_end": 1728127481,
+    "is_live": true
+  },
+  {
+    "id": 2,
+    "creator": {
+      "id": 101,
+      "name": "The Collective",
+      "img": "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/oDlmVNeQ210pRwBm54xAWni9YQVFkYy0UoY42B8B.jpg"
+    },
+    "category": {
+      "id": 201,
+      "name": "Magic The Gathering"
+    },
+    "img": "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8JCN84033XTGHVYTWBVJ57A-collektr.webp",
+    "name": "Scar - Fiery Usurper",
+    "highest_bid": 150,
+    "auction_end": 1728127481,
+    "is_live": false
+  },
+  {
+    "id": 3,
+    "creator": {
+      "id": 101,
+      "name": "The Collective",
+      "img": "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/oDlmVNeQ210pRwBm54xAWni9YQVFkYy0UoY42B8B.jpg"
+    },
+    "category": {
+      "id": 201,
+      "name": "Magic The Gathering"
+    },
+    "img": "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8JCQ12QW5F9QN4JZG9QWCSQ-collektr.webp",
+    "name": "Sergeant Tibbs - Courageous Cat",
+    "highest_bid": 200,
+    "auction_end": 1728127481,
+    "is_live": false
+  },
+  {
+    "id": 4,
+    "creator": {
+      "id": 102,
+      "name": "abgjack",
+      "img": "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/ICIf7S2UxBSbQOwLce17tY8Kvchb4dJ6jSsJUDoY.jpg"
+    },
+    "category": {
+      "id": 202,
+      "name": "Comic & Manga"
+    },
+    "img": "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J6NMVG0ZRYRQW5MX4XMVR6X3-collektr.webp",
+    "name": "X-Men #13",
+    "highest_bid": 200,
+    "auction_end": 1728127481,
+    "is_live": true
+  },
+  {
+    "id": 5,
+    "creator": {
+      "id": 103,
+      "name": "Collektr",
+      "img": "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/mA3D5CzHr2M3o3Sll8B6vWIlhBJiBXwCnCWENQHc.jpg"
+    },
+    "category": {
+      "id": 203,
+      "name": "Flesh & Blood"
+    },
+    "img": "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8P7NH9X0HX1KJD2RH0MY4G1-collektr.webp",
+    "name": "Last Ditch Effort",
+    "highest_bid": 50,
+    "auction_end": 1728127481,
+    "is_live": true
+  }
+]

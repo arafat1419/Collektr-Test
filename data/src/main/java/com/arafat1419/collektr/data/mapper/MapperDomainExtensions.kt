@@ -1,11 +1,21 @@
 package com.arafat1419.collektr.data.mapper
 
 import com.arafat1419.collektr.data.local.model.AuctionEntity
-import com.arafat1419.collektr.domain.model.favorite.FavoriteAuction
+import com.arafat1419.collektr.domain.model.auction.Auction
 
 object MapperDomainExtensions {
-    fun FavoriteAuction.toEntity(): AuctionEntity = AuctionEntity(
+    fun Auction.toEntity(): AuctionEntity = AuctionEntity(
         id = id,
-        title = title
+        creatorId = creator.id,
+        creatorName = creator.name,
+        creatorImg = creator.img,
+        categoryId = category.id,
+        categoryName = category.name,
+        img = img,
+        name = name,
+        highestBid = highestBid,
+        auctionEnd = auctionEnd,
+        isLive = isLive,
+        isFavorite = isFavorite
     )
 }

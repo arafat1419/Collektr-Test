@@ -1,4 +1,4 @@
-package com.arafat1419.collektr.data.network.source
+package com.arafat1419.collektr.data.network.source.cat
 
 import com.arafat1419.collektr.data.network.api.ApiResponse
 import com.arafat1419.collektr.data.network.model.cat.CatFactResponse

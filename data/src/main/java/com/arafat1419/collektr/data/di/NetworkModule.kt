@@ -1,15 +1,19 @@
 package com.arafat1419.collektr.data.di
 
+import android.content.Context
 import com.arafat1419.collektr.data.BuildConfig
 import com.arafat1419.collektr.data.network.api.CatService
-import com.arafat1419.collektr.data.network.source.CatNetworkSource
-import com.arafat1419.collektr.data.network.source.CatNetworkSourceImpl
+import com.arafat1419.collektr.data.network.source.auction.AuctionMockSource
+import com.arafat1419.collektr.data.network.source.auction.AuctionMockSourceImpl
+import com.arafat1419.collektr.data.network.source.cat.CatNetworkSource
+import com.arafat1419.collektr.data.network.source.cat.CatNetworkSourceImpl
 import com.arafat1419.collektr.data.repository.CatRepositoryImpl
 import com.arafat1419.collektr.domain.repository.CatRepository
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -76,5 +80,14 @@ internal class NetworkModule {
     @Singleton
     fun provideCatRepository(catNetworkSource: CatNetworkSource): CatRepository {
         return CatRepositoryImpl(catNetworkSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuctionMockSource(
+        @ApplicationContext context: Context,
+        gson: Gson
+    ): AuctionMockSource {
+        return AuctionMockSourceImpl(context, gson)
     }
 }
