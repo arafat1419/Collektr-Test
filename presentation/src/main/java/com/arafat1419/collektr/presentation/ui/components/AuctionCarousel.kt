@@ -33,8 +33,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.arafat1419.collektr.domain.model.auction.Auction
 import com.arafat1419.collektr.presentation.R
-import com.arafat1419.collektr.presentation.ui.features.home.AuctionItem
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
 import com.arafat1419.collektr.presentation.utils.PresentationUtils
@@ -43,8 +43,8 @@ import com.arafat1419.collektr.presentation.utils.PresentationUtils.moneyFormat
 @Composable
 fun AuctionCarousel(
     modifier: Modifier = Modifier,
-    auctions: List<AuctionItem>,
-    onItemClick: (AuctionItem) -> Unit
+    auctions: List<Auction>,
+    onItemClick: (Auction) -> Unit
 ) {
     val pagerState = rememberPagerState { auctions.size }
 
@@ -78,8 +78,8 @@ fun AuctionCarousel(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     AsyncImage(
-                        model = item.imageUrl,
-                        contentDescription = item.title,
+                        model = item.img,
+                        contentDescription = item.name,
                         modifier = Modifier
                             .aspectRatio(252f / if (isActive) 380f else 350f)
                             .clip(RoundedCornerShape(16.dp)),
@@ -119,13 +119,13 @@ fun AuctionCarousel(
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
-                                    text = item.title,
+                                    text = item.name,
                                     style = MaterialTheme.typography.bodySmall.copy(
                                         fontWeight = FontWeight.Normal
                                     ),
                                 )
                                 Text(
-                                    text = "${item.auctionEnd} | ${
+                                    text = "${PresentationUtils.convertTimestampToDateTime(item.auctionEnd)} | ${
                                         stringResource(
                                             R.string.rm_format,
                                             item.highestBid.moneyFormat()

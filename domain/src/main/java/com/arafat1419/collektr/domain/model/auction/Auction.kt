@@ -7,7 +7,7 @@ data class Auction(
     val category: AuctionCategory = AuctionCategory(),
     val img: String = "",
     val name: String = "",
-    val highestBid: Int = 0,
+    val highestBid: Long = 0,
     val auctionEnd: Long = 0,
     val isLive: Boolean = false,
     val isFavorite: Boolean = false

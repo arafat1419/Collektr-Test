@@ -14,7 +14,7 @@ data class AuctionResponse(
     @SerializedName("name")
     val name: String = "",
     @SerializedName("highest_bid")
-    val highestBid: Int = 0,
+    val highestBid: Long = 0,
     @SerializedName("auction_end")
     val auctionEnd: Long = 0,
     @SerializedName("is_live")
