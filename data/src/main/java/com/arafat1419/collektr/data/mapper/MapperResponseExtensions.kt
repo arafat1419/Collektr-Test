@@ -1,6 +1,6 @@
 package com.arafat1419.collektr.data.mapper
 
-import com.arafat1419.collektr.data.local.model.AuctionEntity
+import com.arafat1419.collektr.data.local.model.auction.AuctionEntity
 import com.arafat1419.collektr.data.network.model.auction.AuctionCategoryResponse
 import com.arafat1419.collektr.data.network.model.auction.AuctionCreatorResponse
 import com.arafat1419.collektr.data.network.model.auction.AuctionResponse

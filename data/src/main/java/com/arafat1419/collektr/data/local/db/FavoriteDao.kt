@@ -2,7 +2,7 @@ package com.arafat1419.collektr.data.local.db
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.arafat1419.collektr.data.local.model.AuctionEntity
+import com.arafat1419.collektr.data.local.model.auction.AuctionEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

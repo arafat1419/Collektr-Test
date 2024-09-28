@@ -1,4 +1,4 @@
-package com.arafat1419.collektr.data.local.model
+package com.arafat1419.collektr.data.local.model.auction
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

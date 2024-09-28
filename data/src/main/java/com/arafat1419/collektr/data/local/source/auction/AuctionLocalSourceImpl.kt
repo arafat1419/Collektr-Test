@@ -1,7 +1,7 @@
-package com.arafat1419.collektr.data.local.source
+package com.arafat1419.collektr.data.local.source.auction
 
 import com.arafat1419.collektr.data.local.db.AuctionDao
-import com.arafat1419.collektr.data.local.model.AuctionEntity
+import com.arafat1419.collektr.data.local.model.auction.AuctionEntity
 import kotlinx.coroutines.flow.Flow
 
 class AuctionLocalSourceImpl(private val auctionDao: AuctionDao) : AuctionLocalSource {

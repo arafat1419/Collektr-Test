@@ -1,6 +1,6 @@
 package com.arafat1419.collektr.data.repository
 
-import com.arafat1419.collektr.data.local.source.AuctionLocalSource
+import com.arafat1419.collektr.data.local.source.auction.AuctionLocalSource
 import com.arafat1419.collektr.data.mapper.MapperEntityExtensions.toDomain
 import com.arafat1419.collektr.data.mapper.MapperResponseExtensions.toDomain
 import com.arafat1419.collektr.data.mapper.MapperResponseExtensions.toEntity

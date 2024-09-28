@@ -1,7 +1,7 @@
 package com.arafat1419.collektr.data.repository
 
-import com.arafat1419.collektr.data.local.model.AuctionEntity
-import com.arafat1419.collektr.data.local.source.FavoriteLocalSource
+import com.arafat1419.collektr.data.local.model.auction.AuctionEntity
+import com.arafat1419.collektr.data.local.source.favorite.FavoriteLocalSource
 import com.arafat1419.collektr.data.mapper.MapperEntityExtensions.toDomain
 import com.arafat1419.collektr.domain.model.auction.Auction
 import com.arafat1419.collektr.domain.repository.FavoriteRepository

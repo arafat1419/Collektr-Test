@@ -5,10 +5,10 @@ import androidx.room.Room
 import com.arafat1419.collektr.data.local.db.AppDatabase
 import com.arafat1419.collektr.data.local.db.AuctionDao
 import com.arafat1419.collektr.data.local.db.FavoriteDao
-import com.arafat1419.collektr.data.local.source.AuctionLocalSource
-import com.arafat1419.collektr.data.local.source.AuctionLocalSourceImpl
-import com.arafat1419.collektr.data.local.source.FavoriteLocalSource
-import com.arafat1419.collektr.data.local.source.FavoriteLocalSourceImpl
+import com.arafat1419.collektr.data.local.source.auction.AuctionLocalSource
+import com.arafat1419.collektr.data.local.source.auction.AuctionLocalSourceImpl
+import com.arafat1419.collektr.data.local.source.favorite.FavoriteLocalSource
+import com.arafat1419.collektr.data.local.source.favorite.FavoriteLocalSourceImpl
 import com.arafat1419.collektr.data.network.source.auction.AuctionMockSource
 import com.arafat1419.collektr.data.repository.AuctionRepositoryImpl
 import com.arafat1419.collektr.data.repository.FavoriteRepositoryImpl
