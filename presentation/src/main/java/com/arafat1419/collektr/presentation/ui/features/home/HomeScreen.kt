@@ -42,11 +42,16 @@ fun HomeScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is HomeViewEvent.NavigateToDetails -> {
-                    if (event.auction.isLive) {
-                        navController.navigate(NavigationItem.LiveAuction.route)
-                    } else {
-                        navController.navigate(NavigationItem.DetailAuction.route)
-                    }
+                    navController.navigate(
+                        NavigationItem.setAuctionId(
+                            if (event.auction.isLive) {
+                                NavigationItem.LiveAuction
+                            } else {
+                                NavigationItem.DetailAuction
+                            },
+                            event.auction.id
+                        )
+                    )
                 }
 
                 else -> {}

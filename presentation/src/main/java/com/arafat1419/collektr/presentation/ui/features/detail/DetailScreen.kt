@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.arafat1419.collektr.domain.model.auction.AuctionCreator
 import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
@@ -103,7 +104,8 @@ fun DetailScreen(
 
                             CreatorProfile(
                                 modifier = Modifier
-                                    .padding(top = 4.dp)
+                                    .padding(top = 4.dp),
+                                creator = AuctionCreator()
                             )
                         }
 

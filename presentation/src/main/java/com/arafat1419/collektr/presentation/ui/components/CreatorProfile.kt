@@ -13,19 +13,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.arafat1419.collektr.domain.model.auction.AuctionCreator
 import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.theme.White
 
 @Composable
 fun CreatorProfile(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    creator: AuctionCreator
 ) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = "https://collektr-images.s3.ap-southeast-1.amazonaws.com/avatar/oDlmVNeQ210pRwBm54xAWni9YQVFkYy0UoY42B8B.jpg",
+            model = creator.img,
             contentDescription = stringResource(R.string.creator_logo),
             modifier = Modifier
                 .size(32.dp)
@@ -33,7 +35,7 @@ fun CreatorProfile(
         )
 
         Text(
-            text = "The Collective",
+            text = creator.name,
             modifier = Modifier.padding(start = 8.dp),
             style = MaterialTheme.typography.labelMedium,
             color = White

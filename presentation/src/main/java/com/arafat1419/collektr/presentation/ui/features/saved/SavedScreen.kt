@@ -45,7 +45,16 @@ fun SavedScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is SavedViewEvent.NavigateToDetails -> {
-                    navController.navigate(NavigationItem.DetailAuction.route)
+                    navController.navigate(
+                        NavigationItem.setAuctionId(
+                            if (event.auction.isLive) {
+                                NavigationItem.LiveAuction
+                            } else {
+                                NavigationItem.DetailAuction
+                            },
+                            event.auction.id
+                        )
+                    )
                 }
 
                 else -> {}

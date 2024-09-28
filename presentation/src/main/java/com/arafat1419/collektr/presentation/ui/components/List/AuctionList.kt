@@ -101,7 +101,7 @@ fun AuctionList(
                             text = "${PresentationUtils.convertTimestampToDateTime(item.auctionEnd)} | ${
                                 stringResource(
                                     R.string.rm_format,
-                                    item.highestBid.moneyFormat()
+                                    item.startBid.moneyFormat()
                                 )
                             }",
                             style = MaterialTheme.typography.bodySmall.copy(

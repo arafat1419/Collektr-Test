@@ -19,12 +19,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.arafat1419.collektr.domain.model.auction.Auction
 import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
 
 @Composable
-fun AuctionPopUp(modifier: Modifier = Modifier) {
+fun AuctionPopUp(
+    modifier: Modifier = Modifier,
+    auction: Auction
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -34,7 +38,7 @@ fun AuctionPopUp(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8JCRKXAPB2Z47B6GWVRS7KK-collektr.webp",
+            model = auction.img,
             contentDescription = stringResource(R.string.auction_item),
             modifier = Modifier
                 .clip(RoundedCornerShape(4.dp))
@@ -45,12 +49,12 @@ fun AuctionPopUp(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "Moana - Undeterred Voyager",
+                text = auction.name,
                 style = MaterialTheme.typography.labelMedium,
                 color = White
             )
             Text(
-                text = "“Moana - Undeterred Voyager” is a beautifully crafted, limited edition figure that celebrates the spirit of adventure and determination. This collectible captures Moana in a dynamic pose, standing tall on a base that resembles the deck of her ocean-faring canoe, her gaze fixed on the horizon. With intricate details, from the texture of her traditional Polynesian attire to the flowing waves beneath her, this piece embodies her unwavering courage and connection to the ocean. Perfect for fans and collectors alike, this figure serves as a reminder that no obstacle is too great when guided by purpose and heart.",
+                text = auction.description,
                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Normal),
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
