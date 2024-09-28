@@ -50,6 +50,6 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
 
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
+    implementation(libs.bundles.retrofit)
+    implementation(libs.bundles.okhttp)
 }
