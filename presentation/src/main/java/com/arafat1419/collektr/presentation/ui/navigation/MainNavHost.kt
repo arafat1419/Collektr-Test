@@ -32,7 +32,8 @@ fun MainNavHost(modifier: Modifier = Modifier, navController: NavHostController)
             LiveScreen(navController = navController, auctionId = auctionId?.toInt())
         }
         composable(NavigationItem.DetailAuction.route) {
-            DetailScreen(navController = navController)
+            val auctionId = it.arguments?.getString(NavigationItem.FullDetailArgs.AUCTION_ID)
+            DetailScreen(navController = navController, auctionId = auctionId?.toInt())
         }
     }
 }

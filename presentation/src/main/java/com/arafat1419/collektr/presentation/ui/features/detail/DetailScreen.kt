@@ -12,9 +12,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,9 +28,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.arafat1419.collektr.domain.model.auction.AuctionCreator
 import com.arafat1419.collektr.presentation.R
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
@@ -35,13 +41,32 @@ import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.LightWhite
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
+import com.arafat1419.collektr.presentation.utils.PresentationUtils
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    viewModel: DetailViewModel = hiltViewModel(),
+    auctionId: Int?
 ) {
     val chatBids = (0..10).toList()
+    val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        if (auctionId == null) {
+            navController.popBackStack()
+            return@LaunchedEffect
+        }
+
+        viewModel.onTriggerEvent(DetailViewEvent.GetAuctionDetail(auctionId))
+
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                else -> {}
+            }
+        }
+    }
 
     Box(
         modifier = modifier
@@ -51,8 +76,17 @@ fun DetailScreen(
             TopAppBar(
                 modifier = modifier,
                 navController = navController,
-                navigationItem = NavigationItem.DetailAuction
-            )
+                navigationItem = NavigationItem.DetailAuction,
+                actionIcon =
+                if (uiState.auction.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder
+            ) {
+                viewModel.onTriggerEvent(
+                    DetailViewEvent.SetFavoriteAuction(
+                        auctionId!!,
+                        !uiState.auction.isFavorite
+                    )
+                )
+            }
 
             Column(
                 modifier = Modifier
@@ -60,7 +94,7 @@ fun DetailScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 AsyncImage(
-                    model = "https://cllktr.s3.ap-southeast-1.amazonaws.com/product/01J8JCN84033XTGHVYTWBVJ57A-collektr.webp",
+                    model = uiState.auction.img,
                     contentDescription = stringResource(R.string.auction_item),
                     modifier = Modifier
                         .padding(horizontal = 64.dp)
@@ -84,7 +118,7 @@ fun DetailScreen(
                     modifier = Modifier.padding(start = 16.dp, top = 26.dp, end = 16.dp)
                 ) {
                     Text(
-                        text = "Scar - Fiery Usurper",
+                        text = uiState.auction.name,
                         style = MaterialTheme.typography.titleMedium,
                         color = White
                     )
@@ -105,7 +139,7 @@ fun DetailScreen(
                             CreatorProfile(
                                 modifier = Modifier
                                     .padding(top = 4.dp),
-                                creator = AuctionCreator()
+                                creator = uiState.auction.creator
                             )
                         }
 
@@ -117,7 +151,7 @@ fun DetailScreen(
                             )
 
                             Text(
-                                text = "04:11:20",
+                                text = PresentationUtils.convertTimestampToDateTime(uiState.auction.auctionEnd),
                                 modifier = Modifier.padding(top = 10.dp),
                                 style = MaterialTheme.typography.titleSmall,
                                 color = White
@@ -133,7 +167,7 @@ fun DetailScreen(
                     )
 
                     Text(
-                        text = "“Scar - Fiery Usurper” is a striking collectible figure that embodies the sinister allure of one of the most iconic villains in animation. Captured in a powerful stance, Scar is depicted with a menacing gaze and a wicked grin, exuding his treacherous ambition. ",
+                        text = uiState.auction.description,
                         modifier = Modifier.padding(top = 8.dp),
                         style = MaterialTheme.typography.titleSmall,
                         color = White
