@@ -6,10 +6,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
@@ -27,7 +23,6 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController,
 ) {
-    var navigationSelectedItem: NavigationItem by rememberSaveable { mutableStateOf(NavigationItem.Home) }
     val bottomNavigationItems = NavigationItem.entries
         .filter { it.appBarState == AppBarState.HOME || it.appBarState == AppBarState.MAIN }
 
@@ -37,7 +32,7 @@ fun BottomNavigationBar(
     ) {
         bottomNavigationItems.forEach { bottomNavigation ->
             NavigationBarItem(
-                selected = bottomNavigation == navigationSelectedItem,
+                selected = navController.currentDestination?.route == bottomNavigation.route,
                 label = {
                     Text(
                         text = bottomNavigation.label,
@@ -63,7 +58,6 @@ fun BottomNavigationBar(
                     disabledTextColor = Color.Gray,
                 ),
                 onClick = {
-                    navigationSelectedItem = bottomNavigation
                     navController.navigate(bottomNavigation.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
