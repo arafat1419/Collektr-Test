@@ -19,7 +19,8 @@ object MapperEntityExtensions {
         ),
         img = img,
         name = name,
-        highestBid = highestBid,
+        description = description,
+        startBid = startBid,
         auctionEnd = auctionEnd,
         isLive = isLive,
         isFavorite = isFavorite

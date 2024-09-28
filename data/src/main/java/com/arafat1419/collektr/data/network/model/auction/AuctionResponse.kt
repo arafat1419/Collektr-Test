@@ -13,8 +13,10 @@ data class AuctionResponse(
     val img: String = "",
     @SerializedName("name")
     val name: String = "",
-    @SerializedName("highest_bid")
-    val highestBid: Long = 0,
+    @SerializedName("description")
+    val description: String = "",
+    @SerializedName("start_bid")
+    val startBid: Long = 0,
     @SerializedName("auction_end")
     val auctionEnd: Long = 0,
     @SerializedName("is_live")

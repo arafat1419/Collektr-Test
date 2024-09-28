@@ -30,8 +30,11 @@ data class AuctionEntity(
     @ColumnInfo(name = "name")
     val name: String,
 
-    @ColumnInfo(name = "highest_bid")
-    val highestBid: Long,
+    @ColumnInfo(name = "description")
+    val description: String,
+
+    @ColumnInfo(name = "start_bid")
+    val startBid: Long,
 
     @ColumnInfo(name = "auction_end")
     val auctionEnd: Long,

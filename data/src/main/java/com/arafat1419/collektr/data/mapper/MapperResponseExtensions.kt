@@ -25,7 +25,8 @@ object MapperResponseExtensions {
         categoryName = category.name,
         img = img,
         name = name,
-        highestBid = highestBid,
+        description = description,
+        startBid = startBid,
         auctionEnd = auctionEnd,
         isLive = isLive,
     )
@@ -36,7 +37,8 @@ object MapperResponseExtensions {
         category = category.toDomain(),
         img = img,
         name = name,
-        highestBid = highestBid,
+        description = description,
+        startBid = startBid,
         auctionEnd = auctionEnd,
         isLive = isLive
     )
