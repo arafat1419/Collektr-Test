@@ -114,7 +114,7 @@ fun LiveScreen(
                     Spacer(modifier = Modifier.weight(1F))
 
                     Text(
-                        text = PresentationUtils.convertTimestampToDateTime(uiState.auction.auctionEnd),
+                        text = uiState.countdown,
                         modifier = Modifier
                             .padding(end = 12.dp)
                             .background(

@@ -2,6 +2,7 @@ package com.arafat1419.collektr.presentation.ui.features.live
 
 import androidx.lifecycle.viewModelScope
 import com.arafat1419.collektr.domain.model.chatbid.ChatBid
+import com.arafat1419.collektr.domain.usecase.auction.GetAuctionCountdownUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionDetailsUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetLiveAuctionCountUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionChatBidsUseCase
@@ -22,7 +23,8 @@ class LiveViewModel @Inject constructor(
     private val getAuctionChatBidsUseCase: GetAuctionChatBidsUseCase,
     private val getHighestBidUseCase: GetAuctionHighestBidUseCase,
     private val sendAuctionBidUseCase: SendAuctionBidUseCase,
-    private val sendAuctionChatUseCase: SendAuctionChatUseCase
+    private val sendAuctionChatUseCase: SendAuctionChatUseCase,
+    private val getAuctionCountdownUseCase: GetAuctionCountdownUseCase
 ) : BaseViewModel<LiveViewState, LiveViewEvent>() {
     override fun createInitialState(): LiveViewState = LiveViewState()
 
@@ -37,6 +39,7 @@ class LiveViewModel @Inject constructor(
             is LiveViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
             is LiveViewEvent.SendBid -> sendBid(event.auctionId)
             is LiveViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
+            is LiveViewEvent.GetAuctionCountdown -> getAuctionCountdown(event.targetTime)
             LiveViewEvent.ShowPlaceBidBottomSheet -> {
                 setState { copy(bidError = "", bidAmount = highestBid.bidAmount + 10) }
                 setEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
@@ -56,6 +59,7 @@ class LiveViewModel @Inject constructor(
                 ) { data ->
                     setState { copy(auction = data) }
                     onTriggerEvent(LiveViewEvent.GetAuctionBids(auctionId))
+                    onTriggerEvent(LiveViewEvent.GetAuctionCountdown(data.auctionEnd))
                 }
             }
         }
@@ -149,6 +153,20 @@ class LiveViewModel @Inject constructor(
     private fun setFavoriteAuction(auctionId: Int, state: Boolean) {
         viewModelScope.launch {
             setFavoriteAuctionUseCase.invoke(auctionId, state)
+        }
+    }
+
+    private fun getAuctionCountdown(targetTime: Long) {
+        viewModelScope.launch {
+            getAuctionCountdownUseCase.invoke(targetTime).collect { resource ->
+                handleResource(
+                    resource = resource,
+                    setLoading = { setState { copy(isLoading = it) } },
+                    setError = { setState { copy(error = it) } },
+                ) { data ->
+                    setState { copy(countdown = data) }
+                }
+            }
         }
     }
 }

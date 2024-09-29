@@ -13,6 +13,7 @@ data class LiveViewState(
     val bidAmount: Long = 0,
     val bidError: String = "",
     val chatMessage: String = "",
+    val countdown: String = "",
     val isLoading: Boolean = false,
     val error: String = "",
 ) : IViewState
@@ -27,6 +28,7 @@ sealed class LiveViewEvent : IViewEvent {
     data class OnChatMessageChange(val message: String) : LiveViewEvent()
     data class SendMessage(val auctionId: Int, val message: String) : LiveViewEvent()
     data class SendBid(val auctionId: Int) : LiveViewEvent()
+    data class GetAuctionCountdown(val targetTime: Long) : LiveViewEvent()
     data object ShowPlaceBidBottomSheet : LiveViewEvent()
     data object HidePlaceBidBottomSheet : LiveViewEvent()
 }
