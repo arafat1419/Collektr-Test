@@ -10,6 +10,7 @@ data class LiveViewState(
     val liveCount: Int = 0,
     val chatBids: List<ChatBid> = listOf(),
     val highestBid: ChatBid = ChatBid(),
+    val bidAmount: Long = 0,
     val chatMessage: String = "",
     val isLoading: Boolean = false,
     val error: String = "",
@@ -21,7 +22,10 @@ sealed class LiveViewEvent : IViewEvent {
     data class GetHighestBid(val auctionId: Int) : LiveViewEvent()
     data class SetFavoriteAuction(val auctionId: Int, val state: Boolean) : LiveViewEvent()
     data class GetAuctionBids(val auctionId: Int) : LiveViewEvent()
+    data class OnBidAmountChange(val amount: Long) : LiveViewEvent()
     data class OnChatMessageChange(val message: String) : LiveViewEvent()
     data class SendMessage(val auctionId: Int, val message: String) : LiveViewEvent()
-    data class SendBid(val auctionId: Int, val bidAmount: Long) : LiveViewEvent()
+    data class SendBid(val auctionId: Int) : LiveViewEvent()
+    data object ShowPlaceBidBottomSheet : LiveViewEvent()
+    data object HidePlaceBidBottomSheet : LiveViewEvent()
 }

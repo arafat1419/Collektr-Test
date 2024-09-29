@@ -13,8 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -35,6 +37,7 @@ import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
 import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
 import com.arafat1419.collektr.presentation.ui.components.LiveCount
 import com.arafat1419.collektr.presentation.ui.components.MessageAndBidItem
+import com.arafat1419.collektr.presentation.ui.components.PlaceBidBottomSheet
 import com.arafat1419.collektr.presentation.ui.components.TopAppBar
 import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.Primary
@@ -43,6 +46,7 @@ import com.arafat1419.collektr.presentation.ui.theme.White
 import com.arafat1419.collektr.presentation.utils.PresentationUtils
 import com.arafat1419.collektr.presentation.utils.PresentationUtils.moneyFormat
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LiveScreen(
     modifier: Modifier = Modifier,
@@ -51,6 +55,7 @@ fun LiveScreen(
     auctionId: Int?,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val sheetState = rememberModalBottomSheetState()
 
     LaunchedEffect(Unit) {
         if (auctionId == null) {
@@ -63,6 +68,8 @@ fun LiveScreen(
 
         viewModel.uiEvent.collect { event ->
             when (event) {
+                LiveViewEvent.ShowPlaceBidBottomSheet -> sheetState.show()
+                LiveViewEvent.HidePlaceBidBottomSheet -> sheetState.hide()
                 else -> {}
             }
         }
@@ -176,14 +183,27 @@ fun LiveScreen(
                         )
                     }
                 ) {
-                    viewModel.onTriggerEvent(
-                        LiveViewEvent.SendBid(
-                            auctionId!!,
-                            (uiState.chatBids.size * 50L)
-                        )
-                    )
+                    viewModel.onTriggerEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
                 }
             }
+        }
+    }
+
+    if (sheetState.isVisible) {
+        PlaceBidBottomSheet(
+            sheetState = sheetState,
+            bidAmount = uiState.bidAmount,
+            highestBid = uiState.highestBid.bidAmount,
+            onDismissRequest = {
+                viewModel.onTriggerEvent(LiveViewEvent.HidePlaceBidBottomSheet)
+            },
+            onBidChanged = {
+                viewModel.onTriggerEvent(LiveViewEvent.OnBidAmountChange(it))
+            }
+        ) {
+            viewModel.onTriggerEvent(
+                LiveViewEvent.SendBid(auctionId!!)
+            )
         }
     }
 

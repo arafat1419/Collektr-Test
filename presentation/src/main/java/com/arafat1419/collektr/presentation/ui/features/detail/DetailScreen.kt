@@ -35,6 +35,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.arafat1419.collektr.presentation.R
+import com.arafat1419.collektr.presentation.ui.components.BaseLoading
 import com.arafat1419.collektr.presentation.ui.components.BottomMessageAndBid
 import com.arafat1419.collektr.presentation.ui.components.CreatorProfile
 import com.arafat1419.collektr.presentation.ui.components.List.MessageAndBidList
@@ -229,23 +230,27 @@ fun DetailScreen(
         ) {
             viewModel.onTriggerEvent(DetailViewEvent.ShowPlaceBidBottomSheet)
         }
+    }
 
-        if (sheetState.isVisible) {
-            PlaceBidBottomSheet(
-                sheetState = sheetState,
-                bidAmount = uiState.bidAmount,
-                highestBid = uiState.highestBid.bidAmount,
-                onDismissRequest = {
-                    viewModel.onTriggerEvent(DetailViewEvent.HidePlaceBidBottomSheet)
-                },
-                onBidChanged = {
-                    viewModel.onTriggerEvent(DetailViewEvent.OnBidAmountChange(it))
-                }
-            ) {
-                viewModel.onTriggerEvent(
-                    DetailViewEvent.SendBid(auctionId!!)
-                )
+    if (sheetState.isVisible) {
+        PlaceBidBottomSheet(
+            sheetState = sheetState,
+            bidAmount = uiState.bidAmount,
+            highestBid = uiState.highestBid.bidAmount,
+            onDismissRequest = {
+                viewModel.onTriggerEvent(DetailViewEvent.HidePlaceBidBottomSheet)
+            },
+            onBidChanged = {
+                viewModel.onTriggerEvent(DetailViewEvent.OnBidAmountChange(it))
             }
+        ) {
+            viewModel.onTriggerEvent(
+                DetailViewEvent.SendBid(auctionId!!)
+            )
         }
+    }
+
+    when {
+        uiState.isLoading -> BaseLoading()
     }
 }

@@ -33,9 +33,12 @@ class LiveViewModel @Inject constructor(
             is LiveViewEvent.GetLiveAuctionCount -> getLiveAuctionCount(event.auctionId)
             is LiveViewEvent.GetAuctionBids -> getAuctionBids(event.auctionId)
             is LiveViewEvent.GetHighestBid -> getHighestBid(event.auctionId)
+            is LiveViewEvent.OnBidAmountChange -> setState { copy(bidAmount = event.amount) }
             is LiveViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
-            is LiveViewEvent.SendBid -> sendBid(event.auctionId, event.bidAmount)
+            is LiveViewEvent.SendBid -> sendBid(event.auctionId)
             is LiveViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
+            LiveViewEvent.ShowPlaceBidBottomSheet -> setEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
+            LiveViewEvent.HidePlaceBidBottomSheet -> setEvent(LiveViewEvent.HidePlaceBidBottomSheet)
         }
     }
 
@@ -104,13 +107,13 @@ class LiveViewModel @Inject constructor(
         }
     }
 
-    private fun sendBid(auctionId: Int, bidAmount: Long) {
+    private fun sendBid(auctionId: Int) {
         viewModelScope.launch {
             sendAuctionBidUseCase.invoke(
                 ChatBid(
                     auctionId = auctionId,
                     userName = "Arafat Maku",
-                    bidAmount = bidAmount,
+                    bidAmount = currentState.bidAmount,
                     isBid = true,
                     createdAt = System.currentTimeMillis() / 1000
                 )
