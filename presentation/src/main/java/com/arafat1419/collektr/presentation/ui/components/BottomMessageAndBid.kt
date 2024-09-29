@@ -24,7 +24,13 @@ import com.arafat1419.collektr.presentation.ui.theme.Black
 import com.arafat1419.collektr.presentation.ui.theme.White
 
 @Composable
-fun BottomMessageAndBid(modifier: Modifier = Modifier) {
+fun BottomMessageAndBid(
+    modifier: Modifier = Modifier,
+    message: String = "",
+    onMessageChange: (String) -> Unit = {},
+    onSendClicked: () -> Unit = {},
+    onBidClicked: () -> Unit = {}
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -40,11 +46,13 @@ fun BottomMessageAndBid(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         AppOutlinedTextField(
-            modifier = Modifier.weight(1F)
+            modifier = Modifier.weight(1F),
+            value = message,
+            onValueChange = onMessageChange
         )
 
         IconButton(
-            onClick = {},
+            onClick = onSendClicked,
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Outlined.Send,
@@ -54,7 +62,7 @@ fun BottomMessageAndBid(modifier: Modifier = Modifier) {
         }
 
         Button(
-            onClick = {},
+            onClick = onBidClicked,
             shape = RoundedCornerShape(8.dp),
             elevation = ButtonDefaults.elevatedButtonElevation(0.dp)
         ) {

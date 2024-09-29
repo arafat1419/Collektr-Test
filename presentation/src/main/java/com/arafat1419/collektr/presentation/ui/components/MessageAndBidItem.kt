@@ -27,7 +27,7 @@ fun MessageAndBidItem(
     Row(
         modifier = modifier
             .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
     ) {
         if (icon != null) {
             Icon(

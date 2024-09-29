@@ -21,10 +21,14 @@ import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
 
 @Composable
-fun AppOutlinedTextField(modifier: Modifier = Modifier) {
+fun AppOutlinedTextField(
+    modifier: Modifier = Modifier,
+    value: String = "",
+    onValueChange: (String) -> Unit = {}
+) {
     BasicTextField(
-        value = "",
-        onValueChange = {},
+        value = value,
+        onValueChange = onValueChange,
         modifier = modifier
             .height(40.dp)
             .border(1.dp, White, RoundedCornerShape(8.dp)),
@@ -41,11 +45,13 @@ fun AppOutlinedTextField(modifier: Modifier = Modifier) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "Type a message...",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = LightWhite
-                    )
+                    if (value.isEmpty()) {
+                        Text(
+                            text = "Type a message...",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = LightWhite
+                        )
+                    }
                     innerTextField()
                 }
             }

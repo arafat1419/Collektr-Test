@@ -49,7 +49,6 @@ fun LiveScreen(
     viewModel: LiveViewModel = hiltViewModel(),
     auctionId: Int?,
 ) {
-    val chatBids = (0..10).toList()
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -59,6 +58,7 @@ fun LiveScreen(
         }
 
         viewModel.onTriggerEvent(LiveViewEvent.GetAuctionDetail(auctionId))
+        viewModel.onTriggerEvent(LiveViewEvent.GetLiveAuctionCount(auctionId))
 
         viewModel.uiEvent.collect { event ->
             when (event) {
@@ -120,7 +120,7 @@ fun LiveScreen(
 
                     LiveCount(
                         modifier = Modifier,
-                        count = "420"
+                        count = uiState.liveCount.toString()
                     )
                 }
 
@@ -133,11 +133,12 @@ fun LiveScreen(
 
                 Column(
                     modifier = Modifier
-                        .padding(start = 16.dp, bottom = 12.dp),
+                        .padding(start = 16.dp, bottom = 12.dp, end = 16.dp),
                 ) {
                     MessageAndBidList(
-                        modifier = Modifier.height(120.dp),
-                        chatBids = chatBids
+                        modifier = Modifier
+                            .height(((uiState.chatBids.size.coerceAtMost(3)) * 40).dp),
+                        chatBids = uiState.chatBids
                     )
                     MessageAndBidItem(
                         modifier = Modifier
@@ -149,7 +150,31 @@ fun LiveScreen(
                     )
                 }
 
-                BottomMessageAndBid()
+                BottomMessageAndBid(
+                    message = uiState.chatMessage,
+                    onMessageChange = {
+                        viewModel.onTriggerEvent(
+                            LiveViewEvent.OnChatMessageChange(
+                                it
+                            )
+                        )
+                    },
+                    onSendClicked = {
+                        viewModel.onTriggerEvent(
+                            LiveViewEvent.SendMessage(
+                                auctionId!!,
+                                uiState.chatMessage
+                            )
+                        )
+                    }
+                ) {
+                    viewModel.onTriggerEvent(
+                        LiveViewEvent.SendBid(
+                            auctionId!!,
+                            (uiState.chatBids.size * 50L)
+                        )
+                    )
+                }
             }
         }
     }

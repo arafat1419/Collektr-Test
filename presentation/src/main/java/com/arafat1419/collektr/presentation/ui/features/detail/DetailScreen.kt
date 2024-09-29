@@ -185,7 +185,7 @@ fun DetailScreen(
                             .padding(top = 16.dp, bottom = 112.dp)
                             .fillMaxWidth()
                             .height(192.dp),
-                        chatBids = chatBids
+                        chatBids = listOf()
                     )
                 }
             }
