@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,6 +43,7 @@ import com.arafat1419.collektr.presentation.ui.theme.LightWhite
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
 import com.arafat1419.collektr.presentation.utils.PresentationUtils
+import com.arafat1419.collektr.presentation.utils.PresentationUtils.moneyFormat
 
 @Composable
 fun DetailScreen(
@@ -102,16 +104,20 @@ fun DetailScreen(
                     contentScale = ContentScale.FillWidth
                 )
 
-                MessageAndBidItem(
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .fillMaxWidth()
-                        .background(Primary.copy(alpha = 0.6F))
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    icon = painterResource(R.drawable.outline_star_rate_24),
-                    title = stringResource(R.string.highest_bid),
-                    message = "Arafat Maku (RM150)"
-                )
+                uiState.highestBid.let {
+                    if (it.bidAmount > 0) {
+                        MessageAndBidItem(
+                            modifier = Modifier
+                                .padding(top = 12.dp)
+                                .fillMaxWidth()
+                                .background(Primary.copy(alpha = 0.6F))
+                                .padding(horizontal = 8.dp, vertical = 4.dp),
+                            icon = painterResource(R.drawable.outline_star_rate_24),
+                            title = stringResource(R.string.highest_bid),
+                            message = "${it.userName} (RM${it.bidAmount.moneyFormat()})"
+                        )
+                    }
+                }
 
                 Column(
                     modifier = Modifier.padding(start = 16.dp, top = 26.dp, end = 16.dp)
@@ -172,20 +178,24 @@ fun DetailScreen(
                         color = White
                     )
 
-                    Text(
-                        text = stringResource(R.string.live_chat_bidding),
-                        modifier = Modifier.padding(top = 16.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = LightWhite
-                    )
+                    if (uiState.chatBids.isNotEmpty()) {
+                        Text(
+                            text = stringResource(R.string.live_chat_bidding),
+                            modifier = Modifier.padding(top = 16.dp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = LightWhite
+                        )
 
-                    MessageAndBidList(
-                        modifier = Modifier
-                            .padding(top = 16.dp, bottom = 112.dp)
-                            .fillMaxWidth()
-                            .height(((uiState.chatBids.size.coerceAtMost(5)) * 40).dp),
-                        chatBids = uiState.chatBids
-                    )
+                        MessageAndBidList(
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                                .fillMaxWidth()
+                                .height(((uiState.chatBids.size.coerceAtMost(5)) * 40).dp),
+                            chatBids = uiState.chatBids
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(112.dp))
                 }
             }
         }

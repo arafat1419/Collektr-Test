@@ -5,6 +5,7 @@ import com.arafat1419.collektr.domain.model.chatbid.ChatBid
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionDetailsUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetLiveAuctionCountUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionChatBidsUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionHighestBidUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionBidUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionChatUseCase
 import com.arafat1419.collektr.domain.usecase.favorite.SetFavoriteAuctionUseCase
@@ -19,6 +20,7 @@ class LiveViewModel @Inject constructor(
     private val getLiveAuctionCountUseCase: GetLiveAuctionCountUseCase,
     private val setFavoriteAuctionUseCase: SetFavoriteAuctionUseCase,
     private val getAuctionChatBidsUseCase: GetAuctionChatBidsUseCase,
+    private val getHighestBidUseCase: GetAuctionHighestBidUseCase,
     private val sendAuctionBidUseCase: SendAuctionBidUseCase,
     private val sendAuctionChatUseCase: SendAuctionChatUseCase
 ) : BaseViewModel<LiveViewState, LiveViewEvent>() {
@@ -30,6 +32,7 @@ class LiveViewModel @Inject constructor(
             is LiveViewEvent.SetFavoriteAuction -> setFavoriteAuction(event.auctionId, event.state)
             is LiveViewEvent.GetLiveAuctionCount -> getLiveAuctionCount(event.auctionId)
             is LiveViewEvent.GetAuctionBids -> getAuctionBids(event.auctionId)
+            is LiveViewEvent.GetHighestBid -> getHighestBid(event.auctionId)
             is LiveViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
             is LiveViewEvent.SendBid -> sendBid(event.auctionId, event.bidAmount)
             is LiveViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
@@ -79,6 +82,22 @@ class LiveViewModel @Inject constructor(
                             }
                             copy(chatBids = uniqueBids + currentState.chatBids)
                         }
+                        onTriggerEvent(LiveViewEvent.GetHighestBid(auctionId))
+                    }
+                )
+            }
+        }
+    }
+
+    private fun getHighestBid(auctionId: Int) {
+        viewModelScope.launch {
+            getHighestBidUseCase.invoke(auctionId).collect { resource ->
+                handleResource(
+                    resource = resource,
+                    setLoading = { },
+                    setError = { setState { copy(error = it) } },
+                    { data ->
+                        setState { copy(highestBid = data) }
                     }
                 )
             }

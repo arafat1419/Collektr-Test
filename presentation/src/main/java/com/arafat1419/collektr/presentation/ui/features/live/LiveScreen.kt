@@ -41,6 +41,7 @@ import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.Secondary
 import com.arafat1419.collektr.presentation.ui.theme.White
 import com.arafat1419.collektr.presentation.utils.PresentationUtils
+import com.arafat1419.collektr.presentation.utils.PresentationUtils.moneyFormat
 
 @Composable
 fun LiveScreen(
@@ -140,14 +141,21 @@ fun LiveScreen(
                             .height(((uiState.chatBids.size.coerceAtMost(3)) * 40).dp),
                         chatBids = uiState.chatBids
                     )
-                    MessageAndBidItem(
-                        modifier = Modifier
-                            .padding(top = 8.dp)
-                            .background(Primary.copy(alpha = 0.6F), RoundedCornerShape(4.dp)),
-                        icon = painterResource(R.drawable.outline_star_rate_24),
-                        title = stringResource(R.string.highest_bid),
-                        message = "Arafat Maku (RM150)"
-                    )
+                    uiState.highestBid.let {
+                        if (it.bidAmount > 0) {
+                            MessageAndBidItem(
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                                    .background(
+                                        Primary.copy(alpha = 0.6F),
+                                        RoundedCornerShape(4.dp)
+                                    ),
+                                icon = painterResource(R.drawable.outline_star_rate_24),
+                                title = stringResource(R.string.highest_bid),
+                                message = "${it.userName} (RM${it.bidAmount.moneyFormat()})"
+                            )
+                        }
+                    }
                 }
 
                 BottomMessageAndBid(
