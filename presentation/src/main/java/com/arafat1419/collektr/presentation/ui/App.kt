@@ -28,7 +28,7 @@ fun App(modifier: Modifier = Modifier) {
         modifier = Modifier.fillMaxSize(),
         topBar = { },
         bottomBar = {
-            if (navItem?.appBarState != AppBarState.SUB) {
+            if (navItem?.appBarState == AppBarState.HOME || navItem?.appBarState == AppBarState.MAIN) {
                 BottomNavigationBar(
                     modifier = modifier,
                     navController = navController,

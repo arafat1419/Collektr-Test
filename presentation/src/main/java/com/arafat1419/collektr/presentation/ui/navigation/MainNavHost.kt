@@ -10,14 +10,18 @@ import com.arafat1419.collektr.presentation.ui.features.home.HomeScreen
 import com.arafat1419.collektr.presentation.ui.features.live.LiveScreen
 import com.arafat1419.collektr.presentation.ui.features.profile.ProfileScreen
 import com.arafat1419.collektr.presentation.ui.features.saved.SavedScreen
+import com.arafat1419.collektr.presentation.ui.features.splash.SplashScreen
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier, navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = NavigationItem.Home.route,
+        startDestination = NavigationItem.Splash.route,
         modifier = modifier
     ) {
+        composable(NavigationItem.Splash.route) {
+            SplashScreen(navController = navController)
+        }
         composable(NavigationItem.Home.route) {
             HomeScreen(navController = navController)
         }

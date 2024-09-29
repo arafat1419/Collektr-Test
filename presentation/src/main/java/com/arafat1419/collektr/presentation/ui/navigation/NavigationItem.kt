@@ -13,6 +13,8 @@ enum class NavigationItem(
     val icon: ImageVector? = null,
     val appBarState: AppBarState,
 ) {
+    Splash("splash", "Splash", null, AppBarState.SPLASH),
+
     Home("home", "Home", Icons.Filled.Home, AppBarState.HOME),
     Saved("saved", "Saved", Icons.Filled.Favorite, AppBarState.MAIN),
     Profile("profile", "Profile", Icons.Filled.Person, AppBarState.MAIN),

@@ -113,6 +113,8 @@ fun TopAppBar(
                     windowInsets = windowInsets
                 )
             }
+
+            AppBarState.SPLASH -> {}
         }
     }
 }
@@ -120,5 +122,6 @@ fun TopAppBar(
 enum class AppBarState {
     HOME,
     MAIN,
-    SUB
+    SUB,
+    SPLASH
 }
