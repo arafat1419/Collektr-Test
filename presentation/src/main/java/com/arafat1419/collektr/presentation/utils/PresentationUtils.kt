@@ -38,7 +38,7 @@ object PresentationUtils {
 
     fun convertTimestampToDateTime(
         timestamp: Long,
-        pattern: String = "yyyy-MM-dd HH:mm:ss"
+        pattern: String = "MMMM dd, yyyy hh:mm a"
     ): String {
         val date = Date(timestamp * 1000)
 
