@@ -50,7 +50,6 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     auctionId: Int?
 ) {
-    val chatBids = (0..10).toList()
     val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -184,8 +183,8 @@ fun DetailScreen(
                         modifier = Modifier
                             .padding(top = 16.dp, bottom = 112.dp)
                             .fillMaxWidth()
-                            .height(192.dp),
-                        chatBids = listOf()
+                            .height(((uiState.chatBids.size.coerceAtMost(5)) * 40).dp),
+                        chatBids = uiState.chatBids
                     )
                 }
             }
@@ -193,7 +192,30 @@ fun DetailScreen(
 
         BottomMessageAndBid(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-        )
+                .align(Alignment.BottomCenter),
+            message = uiState.chatMessage,
+            onMessageChange = {
+                viewModel.onTriggerEvent(
+                    DetailViewEvent.OnChatMessageChange(
+                        it
+                    )
+                )
+            },
+            onSendClicked = {
+                viewModel.onTriggerEvent(
+                    DetailViewEvent.SendMessage(
+                        auctionId!!,
+                        uiState.chatMessage
+                    )
+                )
+            }
+        ) {
+            viewModel.onTriggerEvent(
+                DetailViewEvent.SendBid(
+                    auctionId!!,
+                    (uiState.chatBids.size * 50L)
+                )
+            )
+        }
     }
 }
