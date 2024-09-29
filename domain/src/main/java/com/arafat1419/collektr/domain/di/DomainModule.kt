@@ -6,6 +6,7 @@ import com.arafat1419.collektr.domain.repository.CatRepository
 import com.arafat1419.collektr.domain.repository.ChatRepository
 import com.arafat1419.collektr.domain.repository.FavoriteRepository
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionCategoriesUseCase
+import com.arafat1419.collektr.domain.usecase.auction.GetAuctionCountdownUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionDetailsUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionsUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetLiveAuctionCountUseCase
@@ -93,5 +94,11 @@ class DomainModule {
     @Singleton
     fun provideGetLiveAuctionCountUseCase(): GetLiveAuctionCountUseCase {
         return GetLiveAuctionCountUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAuctionCountdownUseCase(): GetAuctionCountdownUseCase {
+        return GetAuctionCountdownUseCase()
     }
 }
