@@ -42,7 +42,15 @@ class DetailViewModel @Inject constructor(
             is DetailViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
             is DetailViewEvent.GetAuctionCountdown -> getAuctionCountdown(event.targetTime)
             DetailViewEvent.ShowPlaceBidBottomSheet -> {
-                setState { copy(bidError = "", bidAmount = highestBid.bidAmount + 10) }
+                setState {
+                    copy(
+                        bidError = "",
+                        bidAmount = maxOf(
+                            currentState.highestBid.bidAmount,
+                            currentState.auction.startBid
+                        ) + 10
+                    )
+                }
                 setEvent(DetailViewEvent.ShowPlaceBidBottomSheet)
             }
 

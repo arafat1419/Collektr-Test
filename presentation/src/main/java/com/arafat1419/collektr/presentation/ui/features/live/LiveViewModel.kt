@@ -41,7 +41,15 @@ class LiveViewModel @Inject constructor(
             is LiveViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
             is LiveViewEvent.GetAuctionCountdown -> getAuctionCountdown(event.targetTime)
             LiveViewEvent.ShowPlaceBidBottomSheet -> {
-                setState { copy(bidError = "", bidAmount = highestBid.bidAmount + 10) }
+                setState {
+                    copy(
+                        bidError = "",
+                        bidAmount = maxOf(
+                            currentState.highestBid.bidAmount,
+                            currentState.auction.startBid
+                        ) + 10
+                    )
+                }
                 setEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
             }
 
