@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface BidLocalSource {
     suspend fun getAuctionBids(auctionId: Int): Flow<List<BidEntity>>
+    suspend fun getHighestBid(auctionId: Int): Flow<BidEntity?>
     suspend fun insertBid(bid: BidEntity)
 }

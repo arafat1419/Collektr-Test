@@ -11,6 +11,7 @@ import com.arafat1419.collektr.domain.usecase.auction.GetAuctionsUseCase
 import com.arafat1419.collektr.domain.usecase.auction.GetLiveAuctionCountUseCase
 import com.arafat1419.collektr.domain.usecase.cat.GetCatFactUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionChatBidsUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionHighestBidUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionBidUseCase
 import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionChatUseCase
 import com.arafat1419.collektr.domain.usecase.favorite.GetFavoriteAuctionUseCase
@@ -68,6 +69,12 @@ class DomainModule {
         chatRepository: ChatRepository
     ): GetAuctionChatBidsUseCase {
         return GetAuctionChatBidsUseCase(bidRepository, chatRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAuctionHighestBidUseCase(bidRepository: BidRepository): GetAuctionHighestBidUseCase {
+        return GetAuctionHighestBidUseCase(bidRepository)
     }
 
     @Provides

@@ -8,6 +8,9 @@ internal class BidLocalSourceImpl(private val bidDao: BidDao) : BidLocalSource {
     override suspend fun getAuctionBids(auctionId: Int): Flow<List<BidEntity>> =
         bidDao.getAuctionBids(auctionId)
 
+    override suspend fun getHighestBid(auctionId: Int): Flow<BidEntity?> =
+        bidDao.getHighestBid(auctionId)
+
     override suspend fun insertBid(bid: BidEntity) =
         bidDao.insertBid(bid)
 }

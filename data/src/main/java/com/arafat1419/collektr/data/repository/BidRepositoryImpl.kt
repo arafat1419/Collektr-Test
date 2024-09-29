@@ -21,6 +21,17 @@ internal class BidRepositoryImpl(private val bidLocalSource: BidLocalSource) : B
             }
         ).asFlow()
 
+    override suspend fun getHighestBid(auctionId: Int): Flow<Resource<ChatBid>> =
+        NetworkBoundResource<ChatBid, BidEntity?>(
+            shouldFetch = { false },
+            loadFromDB = {
+                bidLocalSource.getHighestBid(auctionId).map {
+                    it?.toDomain() ?: ChatBid(auctionId = auctionId)
+                }
+            }
+        ).asFlow()
+
+
     override suspend fun insertBid(chatBid: ChatBid) {
         bidLocalSource.insertBid(chatBid.toBidEntity())
     }

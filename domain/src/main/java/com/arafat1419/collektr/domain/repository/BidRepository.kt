@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface BidRepository {
     suspend fun getAuctionBids(auctionId: Int): Flow<Resource<List<ChatBid>>>
+    suspend fun getHighestBid(auctionId: Int): Flow<Resource<ChatBid>>
     suspend fun insertBid(chatBid: ChatBid)
 }
