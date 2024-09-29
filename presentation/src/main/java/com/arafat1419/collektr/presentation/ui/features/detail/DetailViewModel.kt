@@ -1,6 +1,5 @@
 package com.arafat1419.collektr.presentation.ui.features.detail
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.arafat1419.collektr.domain.model.chatbid.ChatBid
 import com.arafat1419.collektr.domain.usecase.auction.GetAuctionDetailsUseCase
@@ -35,9 +34,12 @@ class DetailViewModel @Inject constructor(
 
             is DetailViewEvent.GetAuctionBids -> getAuctionBids(event.auctionId)
             is DetailViewEvent.GetHighestBid -> getHighestBid(event.auctionId)
+            is DetailViewEvent.OnBidAmountChange -> setState { copy(bidAmount = event.amount) }
             is DetailViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
-            is DetailViewEvent.SendBid -> sendBid(event.auctionId, event.bidAmount)
+            is DetailViewEvent.SendBid -> sendBid(event.auctionId)
             is DetailViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
+            DetailViewEvent.ShowPlaceBidBottomSheet -> setEvent(DetailViewEvent.ShowPlaceBidBottomSheet)
+            DetailViewEvent.HidePlaceBidBottomSheet -> setEvent(DetailViewEvent.HidePlaceBidBottomSheet)
         }
     }
 
@@ -57,7 +59,6 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun getAuctionBids(auctionId: Int) {
-        Log.d("LHT", "getAuctionBids: $auctionId")
         viewModelScope.launch {
             getAuctionChatBidsUseCase.invoke(auctionId).collect { resource ->
                 handleResource(
@@ -93,13 +94,13 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun sendBid(auctionId: Int, bidAmount: Long) {
+    private fun sendBid(auctionId: Int) {
         viewModelScope.launch {
             sendAuctionBidUseCase.invoke(
                 ChatBid(
                     auctionId = auctionId,
                     userName = "Arafat Maku",
-                    bidAmount = bidAmount,
+                    bidAmount = currentState.bidAmount,
                     isBid = true,
                     createdAt = System.currentTimeMillis() / 1000
                 )

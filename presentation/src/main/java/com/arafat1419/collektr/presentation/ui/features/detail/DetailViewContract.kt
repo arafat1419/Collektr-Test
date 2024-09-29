@@ -9,6 +9,7 @@ data class DetailViewState(
     val auction: Auction = Auction(),
     val chatBids: List<ChatBid> = listOf(),
     val highestBid: ChatBid = ChatBid(),
+    val bidAmount: Long = 0,
     val chatMessage: String = "",
     val isLoading: Boolean = false,
     val error: String = "",
@@ -19,7 +20,10 @@ sealed class DetailViewEvent : IViewEvent {
     data class SetFavoriteAuction(val auctionId: Int, val state: Boolean) : DetailViewEvent()
     data class GetAuctionBids(val auctionId: Int) : DetailViewEvent()
     data class GetHighestBid(val auctionId: Int) : DetailViewEvent()
+    data class OnBidAmountChange(val amount: Long) : DetailViewEvent()
     data class OnChatMessageChange(val message: String) : DetailViewEvent()
     data class SendMessage(val auctionId: Int, val message: String) : DetailViewEvent()
-    data class SendBid(val auctionId: Int, val bidAmount: Long) : DetailViewEvent()
+    data class SendBid(val auctionId: Int) : DetailViewEvent()
+    data object ShowPlaceBidBottomSheet : DetailViewEvent()
+    data object HidePlaceBidBottomSheet : DetailViewEvent()
 }
