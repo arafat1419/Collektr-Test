@@ -46,7 +46,6 @@ import com.arafat1419.collektr.presentation.ui.navigation.NavigationItem
 import com.arafat1419.collektr.presentation.ui.theme.LightWhite
 import com.arafat1419.collektr.presentation.ui.theme.Primary
 import com.arafat1419.collektr.presentation.ui.theme.White
-import com.arafat1419.collektr.presentation.utils.PresentationUtils
 import com.arafat1419.collektr.presentation.utils.PresentationUtils.moneyFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -164,7 +163,7 @@ fun DetailScreen(
                             )
 
                             Text(
-                                text = PresentationUtils.convertTimestampToDateTime(uiState.auction.auctionEnd),
+                                text = uiState.countdown,
                                 modifier = Modifier.padding(top = 10.dp),
                                 style = MaterialTheme.typography.titleSmall,
                                 color = White

@@ -12,6 +12,7 @@ data class DetailViewState(
     val bidAmount: Long = 0,
     val bidError: String = "",
     val chatMessage: String = "",
+    val countdown: String = "",
     val isLoading: Boolean = false,
     val error: String = "",
 ) : IViewState
@@ -25,6 +26,7 @@ sealed class DetailViewEvent : IViewEvent {
     data class OnChatMessageChange(val message: String) : DetailViewEvent()
     data class SendMessage(val auctionId: Int, val message: String) : DetailViewEvent()
     data class SendBid(val auctionId: Int) : DetailViewEvent()
+    data class GetAuctionCountdown(val targetTime: Long) : DetailViewEvent()
     data object ShowPlaceBidBottomSheet : DetailViewEvent()
     data object HidePlaceBidBottomSheet : DetailViewEvent()
 }
