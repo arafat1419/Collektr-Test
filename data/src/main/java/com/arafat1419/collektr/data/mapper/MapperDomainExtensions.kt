@@ -1,10 +1,13 @@
 package com.arafat1419.collektr.data.mapper
 
 import com.arafat1419.collektr.data.local.model.auction.AuctionEntity
+import com.arafat1419.collektr.data.local.model.bid.BidEntity
+import com.arafat1419.collektr.data.local.model.chat.ChatEntity
 import com.arafat1419.collektr.domain.model.auction.Auction
+import com.arafat1419.collektr.domain.model.chatbid.ChatBid
 
 object MapperDomainExtensions {
-    fun Auction.toEntity(): AuctionEntity = AuctionEntity(
+    fun Auction.toBidEntity(): AuctionEntity = AuctionEntity(
         id = id,
         creatorId = creator.id,
         creatorName = creator.name,
@@ -18,5 +21,21 @@ object MapperDomainExtensions {
         auctionEnd = auctionEnd,
         isLive = isLive,
         isFavorite = isFavorite,
+    )
+
+    fun ChatBid.toBidEntity(): BidEntity = BidEntity(
+        id = id,
+        auctionId = auctionId,
+        userName = userName,
+        bidAmount = bidAmount,
+        createdAt = createdAt
+    )
+
+    fun ChatBid.toChatEntity(): ChatEntity = ChatEntity(
+        id = id,
+        auctionId = auctionId,
+        userName = userName,
+        message = chatMessage,
+        createdAt = createdAt
     )
 }

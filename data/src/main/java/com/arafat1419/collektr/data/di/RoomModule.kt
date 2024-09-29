@@ -4,15 +4,25 @@ import android.content.Context
 import androidx.room.Room
 import com.arafat1419.collektr.data.local.db.AppDatabase
 import com.arafat1419.collektr.data.local.db.AuctionDao
+import com.arafat1419.collektr.data.local.db.BidDao
+import com.arafat1419.collektr.data.local.db.ChatDao
 import com.arafat1419.collektr.data.local.db.FavoriteDao
 import com.arafat1419.collektr.data.local.source.auction.AuctionLocalSource
 import com.arafat1419.collektr.data.local.source.auction.AuctionLocalSourceImpl
+import com.arafat1419.collektr.data.local.source.bid.BidLocalSource
+import com.arafat1419.collektr.data.local.source.bid.BidLocalSourceImpl
+import com.arafat1419.collektr.data.local.source.chat.ChatLocalSource
+import com.arafat1419.collektr.data.local.source.chat.ChatLocalSourceImpl
 import com.arafat1419.collektr.data.local.source.favorite.FavoriteLocalSource
 import com.arafat1419.collektr.data.local.source.favorite.FavoriteLocalSourceImpl
 import com.arafat1419.collektr.data.network.source.auction.AuctionMockSource
 import com.arafat1419.collektr.data.repository.AuctionRepositoryImpl
+import com.arafat1419.collektr.data.repository.BidRepositoryImpl
+import com.arafat1419.collektr.data.repository.ChatRepositoryImpl
 import com.arafat1419.collektr.data.repository.FavoriteRepositoryImpl
 import com.arafat1419.collektr.domain.repository.AuctionRepository
+import com.arafat1419.collektr.domain.repository.BidRepository
+import com.arafat1419.collektr.domain.repository.ChatRepository
 import com.arafat1419.collektr.domain.repository.FavoriteRepository
 import dagger.Module
 import dagger.Provides
@@ -72,5 +82,41 @@ internal class RoomModule {
         auctionLocalSource: AuctionLocalSource
     ): AuctionRepository {
         return AuctionRepositoryImpl(auctionMockSource, auctionLocalSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBidDao(appDatabase: AppDatabase): BidDao {
+        return appDatabase.bidDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBidRepository(bidLocalSource: BidLocalSource): BidRepository {
+        return BidRepositoryImpl(bidLocalSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBidLocalSource(bidDao: BidDao): BidLocalSource {
+        return BidLocalSourceImpl(bidDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatDao(appDatabase: AppDatabase): ChatDao {
+        return appDatabase.chatDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatLocalSource(chatDao: ChatDao): ChatLocalSource {
+        return ChatLocalSourceImpl(chatDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChatRepository(chatLocalSource: ChatLocalSource): ChatRepository {
+        return ChatRepositoryImpl(chatLocalSource)
     }
 }
