@@ -87,7 +87,8 @@ fun HomeScreen(
                     },
                     modifier = Modifier
                         .padding(
-                            start = if (uiState.auctionCategories.first() == category) 16.dp else 0.dp
+                            start = if (uiState.auctionCategories.first() == category) 16.dp else 0.dp,
+                            end = if (uiState.auctionCategories.last() == category) 16.dp else 0.dp
                         ),
                     shape = RoundedCornerShape(8.dp),
                     colors = SuggestionChipDefaults.suggestionChipColors(
