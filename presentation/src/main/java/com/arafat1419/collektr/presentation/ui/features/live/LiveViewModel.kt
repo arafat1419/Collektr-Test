@@ -37,7 +37,11 @@ class LiveViewModel @Inject constructor(
             is LiveViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
             is LiveViewEvent.SendBid -> sendBid(event.auctionId)
             is LiveViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
-            LiveViewEvent.ShowPlaceBidBottomSheet -> setEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
+            LiveViewEvent.ShowPlaceBidBottomSheet -> {
+                setState { copy(bidError = "", bidAmount = highestBid.bidAmount + 10) }
+                setEvent(LiveViewEvent.ShowPlaceBidBottomSheet)
+            }
+
             LiveViewEvent.HidePlaceBidBottomSheet -> setEvent(LiveViewEvent.HidePlaceBidBottomSheet)
         }
     }
@@ -116,8 +120,14 @@ class LiveViewModel @Inject constructor(
                     bidAmount = currentState.bidAmount,
                     isBid = true,
                     createdAt = System.currentTimeMillis() / 1000
-                )
-            )
+                ),
+                maxOf(currentState.highestBid.bidAmount, currentState.auction.startBid)
+            ).also {
+                setState { copy(bidError = it) }
+                if (it.isEmpty()) {
+                    setEvent(LiveViewEvent.HidePlaceBidBottomSheet)
+                }
+            }
         }
     }
 

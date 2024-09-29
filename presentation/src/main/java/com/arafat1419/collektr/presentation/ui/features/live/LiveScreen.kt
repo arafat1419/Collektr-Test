@@ -192,8 +192,10 @@ fun LiveScreen(
     if (sheetState.isVisible) {
         PlaceBidBottomSheet(
             sheetState = sheetState,
+            error = uiState.bidError,
             bidAmount = uiState.bidAmount,
             highestBid = uiState.highestBid.bidAmount,
+            startBid = uiState.auction.startBid,
             onDismissRequest = {
                 viewModel.onTriggerEvent(LiveViewEvent.HidePlaceBidBottomSheet)
             },

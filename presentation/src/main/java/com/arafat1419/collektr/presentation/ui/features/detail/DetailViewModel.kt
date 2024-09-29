@@ -38,7 +38,11 @@ class DetailViewModel @Inject constructor(
             is DetailViewEvent.OnChatMessageChange -> setState { copy(chatMessage = event.message) }
             is DetailViewEvent.SendBid -> sendBid(event.auctionId)
             is DetailViewEvent.SendMessage -> sendMessage(event.auctionId, event.message)
-            DetailViewEvent.ShowPlaceBidBottomSheet -> setEvent(DetailViewEvent.ShowPlaceBidBottomSheet)
+            DetailViewEvent.ShowPlaceBidBottomSheet -> {
+                setState { copy(bidError = "", bidAmount = highestBid.bidAmount + 10) }
+                setEvent(DetailViewEvent.ShowPlaceBidBottomSheet)
+            }
+
             DetailViewEvent.HidePlaceBidBottomSheet -> setEvent(DetailViewEvent.HidePlaceBidBottomSheet)
         }
     }
@@ -103,8 +107,14 @@ class DetailViewModel @Inject constructor(
                     bidAmount = currentState.bidAmount,
                     isBid = true,
                     createdAt = System.currentTimeMillis() / 1000
-                )
-            )
+                ),
+                maxOf(currentState.highestBid.bidAmount, currentState.auction.startBid)
+            ).also {
+                setState { copy(bidError = it) }
+                if (it.isEmpty()) {
+                    setEvent(DetailViewEvent.HidePlaceBidBottomSheet)
+                }
+            }
         }
     }
 

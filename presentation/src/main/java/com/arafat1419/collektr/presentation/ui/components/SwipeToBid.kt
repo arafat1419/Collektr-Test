@@ -1,6 +1,7 @@
 package com.arafat1419.collektr.presentation.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -17,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +31,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -43,6 +46,7 @@ import kotlin.math.roundToInt
 @Composable
 fun SwipeToBid(
     modifier: Modifier = Modifier,
+    isBidSuccess: Boolean = false,
     onBidPlaced: () -> Unit
 ) {
     var currentState by remember { mutableStateOf(SwipeState.Default) }
@@ -63,7 +67,11 @@ fun SwipeToBid(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    if (currentState == SwipeState.BidPlaced) Green else White,
+                    when {
+                        currentState == SwipeState.Default -> White
+                        isBidSuccess -> Green
+                        else -> Color.Red
+                    },
                     shape = RoundedCornerShape(8.dp)
                 )
                 .draggable(
@@ -120,7 +128,7 @@ fun SwipeToBid(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = "Bid Placed",
+                            text = if (isBidSuccess) "Bid Placed" else "Bid Failed",
                             modifier = Modifier.weight(1F),
                             style = MaterialTheme.typography.labelLarge,
                             textAlign = TextAlign.Center,
@@ -131,11 +139,17 @@ fun SwipeToBid(
                             modifier = Modifier
                                 .size(32.dp)
                                 .background(White, RoundedCornerShape(6.dp))
+                                .clickable {
+                                    if (!isBidSuccess) {
+                                        currentState = SwipeState.Default
+                                        offset.floatValue = 0f
+                                    }
+                                }
                         ) {
                             Icon(
-                                imageVector = Icons.Filled.Done,
+                                imageVector = if (isBidSuccess) Icons.Filled.Done else Icons.Filled.Refresh,
                                 contentDescription = null,
-                                tint = Green,
+                                tint = if (isBidSuccess) Green else Color.Red,
                                 modifier = Modifier
                                     .align(Alignment.Center)
                                     .size(24.dp)

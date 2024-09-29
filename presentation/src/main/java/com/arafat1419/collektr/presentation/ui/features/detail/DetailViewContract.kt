@@ -10,6 +10,7 @@ data class DetailViewState(
     val chatBids: List<ChatBid> = listOf(),
     val highestBid: ChatBid = ChatBid(),
     val bidAmount: Long = 0,
+    val bidError: String = "",
     val chatMessage: String = "",
     val isLoading: Boolean = false,
     val error: String = "",

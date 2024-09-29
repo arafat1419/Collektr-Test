@@ -236,7 +236,9 @@ fun DetailScreen(
         PlaceBidBottomSheet(
             sheetState = sheetState,
             bidAmount = uiState.bidAmount,
+            error = uiState.bidError,
             highestBid = uiState.highestBid.bidAmount,
+            startBid = uiState.auction.startBid,
             onDismissRequest = {
                 viewModel.onTriggerEvent(DetailViewEvent.HidePlaceBidBottomSheet)
             },
