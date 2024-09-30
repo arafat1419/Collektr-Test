@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.font.FontWeight
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.arafat1419.collektr.presentation.ui.components.AppBarState
 import com.arafat1419.collektr.presentation.ui.theme.Black
@@ -59,7 +58,7 @@ fun BottomNavigationBar(
                 ),
                 onClick = {
                     navController.navigate(bottomNavigation.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(NavigationItem.Home.route) {
                             saveState = true
                         }
                         launchSingleTop = true
