@@ -95,3 +95,6 @@ When starting this project, I faced significant doubts, especially regarding the
 - Once the project is opened, Android Studio will automatically attempt to sync Gradle. If prompted, allow it to download and sync all dependencies.
 4. Build the Project
 - Ensure that the project builds successfully by selecting the Build menu from the top bar and choosing Make Project or Rebuild Project. Alternatively, you can use the shortcut Ctrl + F9 (Windows/Linux) or Cmd + F9 (Mac) to build the project.
+
+## APK
+- https://drive.google.com/drive/folders/139MOEjhbyPqTBxFwXLGX1wgyVnvWquKj?usp=sharing
