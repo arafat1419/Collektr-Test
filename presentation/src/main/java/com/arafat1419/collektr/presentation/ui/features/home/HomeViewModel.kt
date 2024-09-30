@@ -1,8 +1,8 @@
 package com.arafat1419.collektr.presentation.ui.features.home
 
 import androidx.lifecycle.viewModelScope
-import com.arafat1419.collektr.domain.usecase.auction.GetAuctionCategoriesUseCase
-import com.arafat1419.collektr.domain.usecase.auction.GetAuctionsUseCase
+import com.arafat1419.collektr.domain.usecase.auction.categories.GetAuctionCategoriesUseCase
+import com.arafat1419.collektr.domain.usecase.auction.list.GetAuctionsUseCase
 import com.arafat1419.collektr.presentation.ui.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

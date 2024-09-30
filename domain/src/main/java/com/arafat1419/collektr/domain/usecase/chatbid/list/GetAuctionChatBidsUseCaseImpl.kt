@@ -1,4 +1,4 @@
-package com.arafat1419.collektr.domain.usecase.chatbid
+package com.arafat1419.collektr.domain.usecase.chatbid.list
 
 import com.arafat1419.collektr.domain.model.chatbid.ChatBid
 import com.arafat1419.collektr.domain.repository.BidRepository
@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.merge
 
-class GetAuctionChatBidsUseCase(
+class GetAuctionChatBidsUseCaseImpl(
     private val bidRepository: BidRepository,
     private val chatRepository: ChatRepository
-) {
-    suspend operator fun invoke(auctionId: Int): Flow<Resource<List<ChatBid>>> = flow {
+) : GetAuctionChatBidsUseCase {
+    override suspend operator fun invoke(auctionId: Int): Flow<Resource<List<ChatBid>>> = flow {
         emit(Resource.Loading())
         try {
             val bidsFlow = bidRepository.getAuctionBids(auctionId)
@@ -36,3 +36,4 @@ class GetAuctionChatBidsUseCase(
         }
     }.flowOn(Dispatchers.IO)
 }
+

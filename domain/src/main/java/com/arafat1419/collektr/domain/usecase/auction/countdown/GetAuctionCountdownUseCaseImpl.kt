@@ -1,4 +1,4 @@
-package com.arafat1419.collektr.domain.usecase.auction
+package com.arafat1419.collektr.domain.usecase.auction.countdown
 
 import com.arafat1419.collektr.domain.vo.Resource
 import kotlinx.coroutines.delay
@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 
-class GetAuctionCountdownUseCase {
-    suspend operator fun invoke(targetTime: Long): Flow<Resource<String>> = flow {
+class GetAuctionCountdownUseCaseImpl : GetAuctionCountdownUseCase {
+    override suspend operator fun invoke(targetTime: Long): Flow<Resource<String>> = flow {
         emit(Resource.Loading())
         try {
             while (true) {
@@ -33,3 +33,4 @@ class GetAuctionCountdownUseCase {
         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
+

@@ -1,4 +1,4 @@
-package com.arafat1419.collektr.domain.usecase.auction
+package com.arafat1419.collektr.domain.usecase.auction.live
 
 import com.arafat1419.collektr.domain.vo.Resource
 import kotlinx.coroutines.Dispatchers
@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class GetLiveAuctionCountUseCase {
-    suspend operator fun invoke(auctionId: Int): Flow<Resource<Int>> = flow {
+class GetLiveAuctionCountUseCaseImpl : GetLiveAuctionCountUseCase {
+    override suspend operator fun invoke(auctionId: Int): Flow<Resource<Int>> = flow {
         emit(Resource.Loading())
         try {
             while (true) {
@@ -21,3 +21,4 @@ class GetLiveAuctionCountUseCase {
         }
     }.flowOn(Dispatchers.IO)
 }
+

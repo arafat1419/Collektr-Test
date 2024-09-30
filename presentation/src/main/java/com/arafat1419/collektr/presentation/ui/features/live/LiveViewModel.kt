@@ -2,13 +2,13 @@ package com.arafat1419.collektr.presentation.ui.features.live
 
 import androidx.lifecycle.viewModelScope
 import com.arafat1419.collektr.domain.model.chatbid.ChatBid
-import com.arafat1419.collektr.domain.usecase.auction.GetAuctionCountdownUseCase
-import com.arafat1419.collektr.domain.usecase.auction.GetAuctionDetailsUseCase
-import com.arafat1419.collektr.domain.usecase.auction.GetLiveAuctionCountUseCase
-import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionChatBidsUseCase
-import com.arafat1419.collektr.domain.usecase.chatbid.GetAuctionHighestBidUseCase
-import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionBidUseCase
-import com.arafat1419.collektr.domain.usecase.chatbid.SendAuctionChatUseCase
+import com.arafat1419.collektr.domain.usecase.auction.countdown.GetAuctionCountdownUseCase
+import com.arafat1419.collektr.domain.usecase.auction.detail.GetAuctionDetailsUseCase
+import com.arafat1419.collektr.domain.usecase.auction.live.GetLiveAuctionCountUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.highest.GetAuctionHighestBidUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.list.GetAuctionChatBidsUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.send.SendAuctionBidUseCase
+import com.arafat1419.collektr.domain.usecase.chatbid.send.SendAuctionChatUseCase
 import com.arafat1419.collektr.domain.usecase.favorite.SetFavoriteAuctionUseCase
 import com.arafat1419.collektr.presentation.ui.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
