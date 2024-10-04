@@ -3,6 +3,7 @@ package com.arafat1419.collektr.presentation.ui.features.home
 import androidx.lifecycle.viewModelScope
 import com.arafat1419.collektr.domain.usecase.auction.categories.GetAuctionCategoriesUseCase
 import com.arafat1419.collektr.domain.usecase.auction.list.GetAuctionsUseCase
+import com.arafat1419.collektr.domain.usecase.cat.GetCatFactUseCase
 import com.arafat1419.collektr.presentation.ui.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -11,8 +12,14 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAuctionsUseCase: GetAuctionsUseCase,
-    private val getAuctionCategoriesUseCase: GetAuctionCategoriesUseCase
+    private val getAuctionCategoriesUseCase: GetAuctionCategoriesUseCase,
+    private val getCatFactUseCase: GetCatFactUseCase
 ) : BaseViewModel<HomeViewState, HomeViewEvent>() {
+
+    init {
+        onTriggerEvent(HomeViewEvent.GetCatFact)
+    }
+
     override fun createInitialState(): HomeViewState = HomeViewState()
 
     override fun onTriggerEvent(event: HomeViewEvent) {
@@ -23,6 +30,7 @@ class HomeViewModel @Inject constructor(
                 getAuctions(event.categoryId)
             }
 
+            HomeViewEvent.GetCatFact -> getCatFact()
             HomeViewEvent.GetAuctionsCategories -> getAuctionsCategories()
         }
     }
@@ -56,6 +64,21 @@ class HomeViewModel @Inject constructor(
                         setState { copy(auctions = it) }
                     }
                 }
+        }
+    }
+
+    private fun getCatFact() {
+        viewModelScope.launch {
+            getCatFactUseCase.invoke().collect { resource ->
+                handleResource(
+                    resource = resource,
+                    setLoading = { setState { copy(isLoading = it) } },
+                    setError = { setState { copy(error = it) } },
+                ) {
+                    setState { copy(catFact = it) }
+                    setEvent(HomeViewEvent.GetCatFact)
+                }
+            }
         }
     }
 }
